@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  a(href="/notes/new") New Note
+  div(class="notes")
+    each note in notes
+      div(class="note")
+        div(class="title")= note.title
+        div= note.body

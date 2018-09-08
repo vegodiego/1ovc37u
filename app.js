@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Note = require("./models/Note");
 const path = require('path');
 const md = require('marked');
 
@@ -12,18 +13,6 @@ app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-const NoteSchema = new mongoose.Schema({
-  title: { type: String },
-  body: { type: String }
-});
-NoteSchema.methods.truncateBody = function() {
-  if (this.body && this.body.length > 75) {
-    return this.body.substring(0, 70) + " ...";
-  }
-  return this.body;
-};
-const Note = mongoose.model("Note", NoteSchema);
 
 app.get("/", async (req, res) => {
   const notes = await Note.find();

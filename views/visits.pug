@@ -1,0 +1,13 @@
+extends layout.pug
+
+block content
+  table
+    thead
+      tr
+        th Path
+        th visits
+    tbody
+      each path in paths
+        tr
+          td= path.path
+          td= path.count
